@@ -1,0 +1,49 @@
+{
+  "name": "db",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/db/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/db",
+        "main": "libs/db/src/index.ts",
+        "tsConfig": "libs/db/tsconfig.lib.json",
+        "assets": ["libs/db/*.md"],
+        "generatePackageJson": true,
+        "format": ["cjs"]
+      }
+    },
+    "start": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "supabase start",
+        "cwd": "libs/db"
+      }
+    },
+    "stop": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "supabase stop",
+        "cwd": "libs/db"
+      }
+    },
+    "diff": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx supabase db diff -f {args.diffName} ",
+        "cwd": "libs/db"
+      }
+    },
+    "gen:db:types": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "npx supabase gen types --lang  typescript --local  > src/lib/db.types.ts",
+        "cwd": "libs/db"
+      }
+    }
+  }
+}

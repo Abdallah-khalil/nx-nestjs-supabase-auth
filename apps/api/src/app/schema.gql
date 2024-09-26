@@ -1,0 +1,97 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  """image url for the profile"""
+  profilePicture: String
+
+  """address"""
+  address: String
+
+  """full name"""
+  fullName: String
+
+  """primary key"""
+  id: String
+
+  """stripe customer id"""
+  stripeCustomerId: String
+}
+
+type AuthSessionType {
+  accessToken: String
+  refreshToken: String
+}
+
+type AuthUserType {
+  """email"""
+  email: String
+
+  """phone"""
+  phone: String
+}
+
+type AuthResponseType {
+  authSession: AuthSessionType!
+  authUser: AuthUserType!
+  user: User!
+}
+
+type Query {
+  users: [User!]!
+  user(id: String!): User!
+}
+
+type Mutation {
+  updateUser(updateUserInput: UpdateUserInput!): User!
+  removeUser(id: String!): User!
+  signup(signupInput: SignupInput!): AuthResponseType!
+  login(loginInput: LoginInput!): AuthResponseType!
+}
+
+input UpdateUserInput {
+  """image url for the profile"""
+  profilePicture: String
+
+  """address"""
+  address: String
+
+  """full name"""
+  fullName: String
+
+  """stripe customer id"""
+  stripeCustomerId: String
+  id: String!
+}
+
+input SignupInput {
+  """image url for the profile"""
+  profilePicture: String
+
+  """address"""
+  address: String
+
+  """full name"""
+  fullName: String
+
+  """stripe customer id"""
+  stripeCustomerId: String
+
+  """email"""
+  email: String
+
+  """password"""
+  password: String
+
+  """phone number"""
+  phoneNumber: String
+}
+
+input LoginInput {
+  """email"""
+  email: String
+
+  """password"""
+  password: String
+}
